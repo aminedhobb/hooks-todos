@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from './index'
 
 export default function App() {
-  return <div>App</div>
+  const value = useContext(UserContext)
+
+  return <div>Hello {value}</div>
 }
