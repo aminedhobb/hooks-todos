@@ -20,6 +20,8 @@ export default function TodoForm() {
     () => {
       if (currentTodo.text) {
         setTodo(currentTodo.text)
+      } else {
+        setTodo('')
       }
     }, [currentTodo.id]
   )
