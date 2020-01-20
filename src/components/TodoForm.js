@@ -1,14 +1,28 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import TodosContext from '../context'
 
 export default function TodoForm() {
   const [todo, setTodo] = useState('')
-  const { dispatch } = useContext(TodosContext)
+  const { state: { currentTodo }, dispatch } = useContext(TodosContext)
+
+
   const handleSubmit = event => {
     event.preventDefault()
-    dispatch({ type: 'ADD_TODO', payload: todo })
+    if (currentTodo.text) {
+      dispatch({ type: 'UPDATE_TODO', payload: todo })
+    } else {
+      dispatch({ type: 'ADD_TODO', payload: todo })
+    }
     setTodo('')
   }
+
+  useEffect(
+    () => {
+      if (currentTodo.text) {
+        setTodo(currentTodo.text)
+      }
+    }, [currentTodo.id]
+  )
 
   return(
     <form onSubmit={handleSubmit} className="flex justify-center p-5">

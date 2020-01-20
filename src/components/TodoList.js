@@ -20,7 +20,7 @@ export default function TodoList() {
               className={`flex-1 ml-12 cursor-pointer ${todo.complete && "line-through"}`}
               onDoubleClick={() => dispatch({ type: 'TOGGLE_TODO', payload: todo })}
             >{todo.text}</span>
-            <button>
+            <button onClick={() => dispatch({ type: 'SET_CURRENT_TODO', payload: todo })}>
               <img
                 src="https://icon.now.sh/edit/0050c5"
                 alt="Edit Icon"
