@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import axios from 'axios'
 import TodosContext from '../context'
 
 export default function TodoList() {
@@ -32,7 +33,10 @@ export default function TodoList() {
                 src="https://icon.now.sh/delete/8b0000"
                 alt="Delete Icon"
                 className="h-6"
-                onClick={() => dispatch({ type: 'REMOVE_TODO', payload: todo })}
+                onClick={async () => {
+                  await axios.delete(`https://hooks-api-six.now.sh/todos/${todo.id}`)
+                  dispatch({ type: 'REMOVE_TODO', payload: todo })
+                }}
               />
             </button>
           </li>
