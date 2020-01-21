@@ -11,6 +11,9 @@ export default function reducer(state, action) {
       )
       return { ...state, todos: toggleTodos }
 
+    case 'GET_TODOS':
+      return { ...state, todos: action.payload }
+
     case 'SET_CURRENT_TODO':
       return { ...state, currentTodo: action.payload }
 
