@@ -19,7 +19,13 @@ export default function TodoList() {
           >
             <span
               className={`flex-1 ml-12 cursor-pointer ${todo.complete && "line-through"}`}
-              onDoubleClick={() => dispatch({ type: 'TOGGLE_TODO', payload: todo })}
+              onDoubleClick={async () => {
+                let response = await axios.patch(
+                  `https://hooks-api-six.now.sh/todos/${todo.id}`,
+                  { ...todo, complete: !todo.complete }
+                )
+                dispatch({ type: 'TOGGLE_TODO', payload: response.data })}
+              }
             >{todo.text}</span>
             <button onClick={() => dispatch({ type: 'SET_CURRENT_TODO', payload: todo })}>
               <img

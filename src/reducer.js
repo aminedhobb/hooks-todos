@@ -6,7 +6,7 @@ export default function reducer(state, action) {
     case 'TOGGLE_TODO':
       const toggleTodos = state.todos.map(t =>
         t.id === action.payload.id
-          ? { ...action.payload, complete: !action.payload.complete }
+          ? action.payload
           : t
       )
       return { ...state, todos: toggleTodos }
