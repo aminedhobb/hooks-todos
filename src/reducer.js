@@ -34,19 +34,7 @@ export default function reducer(state, action) {
       return { ...state, todos: updatedTodos, currentTodo: {} }
 
     case 'ADD_TODO':
-      if (!action.payload) {
-        return state
-      }
-      if (state.todos.findIndex(t => t.text === action.payload) > -1) {
-        return state
-      }
-
-      const newTodo = {
-        id: uuidv4(),
-        text: action.payload,
-        complete: false
-      }
-      const AddedTodos = [...state.todos, newTodo]
+      const AddedTodos = [...state.todos, action.payload]
       return { ...state, todos: AddedTodos }
 
     case 'REMOVE_TODO':
