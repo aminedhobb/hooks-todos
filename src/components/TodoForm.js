@@ -10,7 +10,13 @@ export default function TodoForm() {
   const handleSubmit = async event => {
     event.preventDefault()
     if (currentTodo.text) {
-      dispatch({ type: 'UPDATE_TODO', payload: todo })
+      let response = await axios.patch(
+        `https://hooks-api-six.now.sh/todos/${currentTodo.id}`,
+        {
+          text: todo
+        }
+      )
+      dispatch({ type: 'UPDATE_TODO', payload: response.data })
     } else {
       let response = await axios.post(
         'https://hooks-api-six.now.sh/todos',
